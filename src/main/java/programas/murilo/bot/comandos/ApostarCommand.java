@@ -12,16 +12,16 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 import net.dv8tion.jda.api.EmbedBuilder;
 import programas.murilo.bot.util.CoinUtils;
 
-public class SlotMachineCommand extends Command {
+public class ApostarCommand extends Command {
 
 	private int prob;
 
-	public SlotMachineCommand() {
+	public ApostarCommand() {
+		this.prob = 30;
 		this.name = "apostar";
-		this.help = "Aposte no caça-níquel";
+		this.help = "Aposte com agiota. Altos ganhos, poucas perdas. " + this.prob + "% de chance de ganhar";
 		this.aliases = new String[] { "aposta" };
 		this.arguments = "<valor> ou deixa vazio pra tudo";
-		this.prob = 25;
 		this.guildOnly = true;
 	}
 
@@ -41,7 +41,7 @@ public class SlotMachineCommand extends Command {
 		long moedasAntes = Long.parseLong(atual);
 		int valorAleatorio = new Random().nextInt(101);
 
-		boolean tirar;
+		boolean perdeu;
 
 		List<Integer> aleatorio = new ArrayList<>();
 
@@ -58,9 +58,9 @@ public class SlotMachineCommand extends Command {
 		}
 
 		if (aleatorio.contains(valorAleatorio)) {
-			tirar = false;
+			perdeu = false;
 		} else {
-			tirar = true;
+			perdeu = true;
 		}
 
 		String[] args = event.getArgs().split(" ");
@@ -94,13 +94,13 @@ public class SlotMachineCommand extends Command {
 				conta = Long.parseLong(args[0]);
 			}
 		}
-		if (!tirar) {// ganhou
+		if (!perdeu) {// ganhou
 			valor = (long) (Math.random() * (((2 * conta) - conta) + 1)) + conta;
 		} else {
 			valor = (long) (Math.random() * ((conta - 1) + 1)) + 1;
 		}
 
-		if (CoinUtils.mexaValor(event.getMember(), valor, tirar)) {
+		if (CoinUtils.mexaValor(event.getMember(), valor, perdeu)) {
 
 			int moedasDepois = Integer.parseInt(CoinUtils.getDinheiros(event.getMember()));
 
@@ -136,7 +136,7 @@ public class SlotMachineCommand extends Command {
 			} else {
 				EmbedBuilder eb = new EmbedBuilder();
 				eb.setTitle("Erro!");
-				eb.setDescription("Você provavelmente não está no jogo\nUse `OwO entrar` para entrar!");
+				eb.setDescription("Você **provavelmente** não está no jogo\nUse `OwO entrar` para entrar!");
 				eb.setFooter("durr...");
 				eb.setColor(Color.RED);
 				event.reply(eb.build());

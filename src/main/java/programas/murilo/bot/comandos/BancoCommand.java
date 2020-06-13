@@ -14,7 +14,7 @@ public class BancoCommand extends Command {
 	public BancoCommand() {
 		this.name = "banco";
 		this.aliases = new String[] { "extrato", "dindin" };
-		this.help = "Mostra a quantidade de moedas que você tem";
+		this.help = "Mostra a quantidade de $ugas que você tem";
 		this.guildOnly = true;
 	}
 

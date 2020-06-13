@@ -23,10 +23,11 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
+import programas.murilo.bot.comandos.ApostarCommand;
 import programas.murilo.bot.comandos.BancoCommand;
 import programas.murilo.bot.comandos.DarCommand;
 import programas.murilo.bot.comandos.EntrarCommand;
-import programas.murilo.bot.comandos.SlotMachineCommand;
+import programas.murilo.bot.comandos.JogandoCommand;
 
 public class BotAposta {
 
@@ -70,7 +71,13 @@ public class BotAposta {
 
 				new BancoCommand(),
 
-				new SlotMachineCommand());
+				new JogandoCommand(),
+
+//				new RodarCommand(waiter),
+
+//				new HellouCommand(waiter),
+
+				new ApostarCommand());
 
 //				new HelloCommand());
 
