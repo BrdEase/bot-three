@@ -23,7 +23,10 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
+import programas.murilo.bot.comandos.BancoCommand;
+import programas.murilo.bot.comandos.DarCommand;
 import programas.murilo.bot.comandos.EntrarCommand;
+import programas.murilo.bot.comandos.SlotMachineCommand;
 
 public class BotAposta {
 
@@ -33,7 +36,7 @@ public class BotAposta {
 
 		// the second is the bot's owner's id
 //		String ownerId = readCSV().get(0).get(1);
-		String ownerId = "251135383797104640";
+//		String ownerId = "251135383797104640"; do lucas
 
 		// define an eventwaiter, dont forget to add this to the JDABuilder!
 		EventWaiter waiter = new EventWaiter();
@@ -45,16 +48,17 @@ public class BotAposta {
 		client.useDefaultGame();
 
 		// sets the owner of the bot
-		client.setOwnerId(ownerId);
+		client.setOwnerId(readCSV().get(0).get(1));
 
 		// sets emojis used throughout the bot on successes, warnings, and failures
-		client.setEmojis("\uD83D\uDE03", "\uD83D\uDE2E", "\uD83D\uDE26");
+//		client.setEmojis("\u1F346", "\uD83D\uDE2E", "\uD83D\uDE26");
 
 		// sets the bot prefix
-		client.setPrefix(readCSV().get(0).get(2));
+		client.setPrefix(readCSV().get(0).get(2) + " ");
 
 		// adds commands
 		client.addCommands(
+
 				// command to show information about the bot
 				new AboutCommand(Color.BLUE, "an example bot",
 						new String[] { "Cool commands", "Nice examples", "Lots of fun!" },
@@ -62,14 +66,20 @@ public class BotAposta {
 
 				new EntrarCommand(),
 
-				new HelloCommand());
+				new DarCommand(),
+
+				new BancoCommand(),
+
+				new SlotMachineCommand());
+
+//				new HelloCommand());
 
 		new JDABuilder(AccountType.BOT)
 				// set the token
 				.setToken(token)
 
 				// set the game for when the bot is loading
-				.setStatus(OnlineStatus.DO_NOT_DISTURB).setActivity(Activity.playing("loading..."))
+				.setStatus(OnlineStatus.DO_NOT_DISTURB).setActivity(Activity.playing("carregando..."))
 
 				// add the listeners
 				.addEventListeners(waiter, client.build())
@@ -99,11 +109,8 @@ public class BotAposta {
 
 			for (List<String> list : gravar) {
 				for (String s : list) {
-					System.out.print(s);
-					System.out.print(", ");
 					p.print(s);
 				}
-				System.out.println("");
 				p.println();
 			}
 

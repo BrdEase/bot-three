@@ -1,4 +1,4 @@
-package programas.murilo.bot.principal;
+package programas.murilo.bot.comandos;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
